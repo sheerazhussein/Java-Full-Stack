@@ -131,6 +131,27 @@ public class Solution_02 {
         return "FabonacciSeries (" + "terms): " + series.toString().trim();
     }
 
+//    8. Palindrome Checker (Exact Algorithm Implementation)
+
+    public static String isPalindrome(String str) {
+        if(str == null || str.isEmpty()) {
+            return  "Error: Empty string";
+        }
+
+//        step 1: create reversed string here
+        String reversed = "";
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reversed = reversed + str.charAt(i);
+        }
+
+//        step 2: compare original vs reversed
+        if(str.equals(reversed)) {
+            return  str + " is palindrome";
+        } else {
+            return str + " is Not palindrome";
+        }
+    }
+
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -192,14 +213,16 @@ public class Solution_02 {
 //        String to = input.next();
 //        System.out.println("Answer: " + multiCurrencyConverter(amount, from, to));
 
-        // // 7. Fibonacci Test (uncomment to use)
-        System.out.println("Enter a number of terms: ");
-        int terms = input.nextInt();
-        System.out.println("Answer: " + facbonacciSeries(terms));
+        // // 7. Fibonacci Test
+//        System.out.println("Enter a number of terms: ");
+//        int terms = input.nextInt();
+//        System.out.println("Answer: " + facbonacciSeries(terms));
 
 
-
-
+//        8. Palindrome
+        System.out.println("Enter a string: ");
+        String text = input.nextLine();
+        System.out.println("Answer: " + isPalindrome((text)));
 
 
         input.close();
