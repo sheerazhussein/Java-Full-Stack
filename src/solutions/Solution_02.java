@@ -61,7 +61,7 @@ public class Solution_02 {
             return "Equal: " + num1;
         }
     }
-    // 5. Currency Converter
+    // 6. Currency Converter
     public static String currencyConverter (double inrAmount, double exchangeRate) {
         if(exchangeRate <= 0) return "error: Amount can't be negative";
 
