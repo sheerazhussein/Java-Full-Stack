@@ -4,34 +4,38 @@ import java.util.Scanner;
 
 public class Solution_04 {
 
-    /**
-     * A03. AREA OF RECTANGLE
-     * Logic: Length (columns) multiplied by Width (rows).
-     * Formula: A = length * width
-     */
-    public static double getArea(double length, double width) {
-        if (length < 0 || width < 0) {
+    public static double getArea(double a, double b) {
+        if (a < 0 || b < 0) {
             throw new IllegalArgumentException("Dimensions cannot be negative");
         }
-        return length * width;
+
+        if (2 * a <= b) {
+            throw new IllegalArgumentException("Invalid triangle: sides (" + a + ", " + a + ") are too short for base (" + b + ")");
+        }
+
+        double height = Math.sqrt((a * a) - ((b * b) / 4.0));
+        return 0.5 * b * height;
     }
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Enter Length: ");
-        double l = input.nextDouble();
-
-        System.out.print("Enter Width: ");
-        double w = input.nextDouble();
+        Scanner in = new Scanner(System.in);
 
         try {
-            double area = getArea(l, w);
-            System.out.println("Area of Rectangle is: " + area);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+            System.out.print("Enter equal side (a): ");
+            double sideA = in.nextDouble();
 
-        input.close();
+            System.out.print("Enter base (b): ");
+            double baseB = in.nextDouble();
+
+            double result = getArea(sideA, baseB);
+            System.out.printf("Area of Isosceles Triangle: %.2f\n", result);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Math Error: " + e.getMessage());
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Error: Please enter numeric values only.");
+        } finally {
+            in.close();
+        }
     }
 }
