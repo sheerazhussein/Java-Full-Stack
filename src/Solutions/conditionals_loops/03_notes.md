@@ -208,3 +208,72 @@ execution at the nearest matching catch block (or crashing the program
 if none exists). This is better than silent wrong answers.
 IllegalArgumentException specifically means: "the caller passed me
 an invalid argument." It's a RuntimeException — no need to declare it.
+
+
+
+═══════════════════════════════════════════════════════════
+BASIC PROGRAM A02: AREA OF TRIANGLE
+═══════════════════════════════════════════════════════════
+javapublic static double areaOfTriangle(double base, double height) {
+return 0.5 * base * height;
+}
+Why Is Area = ½ × base × height?
+Proof 1: The Parallelogram Argument
+Every triangle is exactly half of a parallelogram with the same base
+and height:
+Step 1: Take any triangle ABC.
+Step 2: Copy it, flip it upside down.
+Step 3: Attach the copy to the top of the original.
+
+    A                  A─────────────A'
+╱╲                  ╲            ╱
+╱  ╲        →         ╲ original ╱
+╱    ╲                  ╲        ╱ copy (flipped)
+B──────C                  B──────C
+
+Result: a PARALLELOGRAM with:
+- base = b (same as triangle's base)
+- height = h (same as triangle's height)
+- area = b × h
+
+Triangle = exactly HALF the parallelogram = (b × h) / 2
+Proof 2: For Right Triangle (most intuitive)
+A right triangle is exactly half of a rectangle:
+┌──────────┐
+│         ╱│
+│        ╱ │  h
+│       ╱  │
+│      ╱   │
+└─────╱────┘
+b
+
+Rectangle area = b × h
+Triangle = one diagonal cut of rectangle = (b × h) / 2  ✓
+Why 0.5 Instead of (1/2)?
+In Java:
+java1/2    = 0    (integer division! both are int, result truncated)
+1.0/2  = 0.5  (float division: one operand is double)
+0.5    = 0.5  (just a double literal, no division at all — fastest)
+0.5 * base * height is the most efficient and clear. Never write (1/2)
+in Java for float math — it equals 0 and silently destroys your result.
+What Is "Height" of a Triangle?
+Critical misconception: height is NOT a side of the triangle. It's the
+perpendicular distance from the base to the opposite vertex:
+A
+╱|
+╱ |  ← height h (perpendicular to base)
+╱  |
+╱   |
+B────C────
+base b
+
+Even if the triangle leans:
+A
+╱ ╲
+╱   ╲
+╱  h  ╲
+╱   |   ╲
+B────|────C
+↑ foot of perpendicular
+The height is always measured at 90° to the base. The slant sides
+don't matter for area.
