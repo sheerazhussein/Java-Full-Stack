@@ -508,3 +508,66 @@ int area = (d1 * d2) / 2;   // 48/2 = 24 ✓ (happens to work here)
 int area = (d1 * d2) / 3;   // 48/3 = 16 ✓
 int area = (d1 * d2) / 5;   // 48/5 = 9  ✗ (should be 9.6, truncated!)
 Always use 2.0 (not 2) when you want floating-point division result.
+
+
+
+
+═══════════════════════════════════════════════════════════
+BASIC PROGRAM A07: AREA OF EQUILATERAL TRIANGLE
+═══════════════════════════════════════════════════════════
+javapublic static double areaOfEquilateralTriangle(double side) {
+return (Math.sqrt(3) / 4.0) * side * side;
+}
+What Is Equilateral?
+"Equilateral" = all three sides equal (Latin: equi=equal, lateral=side).
+Consequence: all three angles also equal = 180°/3 = 60° each.
+A
+╱ ╲
+s╱   ╲s
+╱ 60° ╲
+B───────C
+s
+Deriving the Formula From Scratch
+Step 1: Find the height of an equilateral triangle
+Drop perpendicular from A to midpoint M of BC:
+A
+╱|╲
+s╱ |h╲s
+╱  |  ╲
+B───M───C
+s/2   s/2
+Apply Pythagorean theorem to triangle ABM:
+s² = h² + (s/2)²
+s² = h² + s²/4
+h² = s² - s²/4
+h² = 4s²/4 - s²/4
+h² = 3s²/4
+h  = s√3/2
+Step 2: Compute area
+Area = (1/2) × base × height
+= (1/2) × s × (s√3/2)
+= (1/2) × (s² × √3/2)
+= s²√3/4
+= (√3/4) × s²
+Why Does √3 Appear?
+Because in a 30-60-90 right triangle (which we created by dropping the height):
+Angles: 30°, 60°, 90°
+If hypotenuse = 1:
+short leg (opposite 30°) = 1/2
+long leg  (opposite 60°) = √3/2   ← this IS the height ratio
+
+This is derived from cos(60°) = 1/2  and  sin(60°) = √3/2
+And sin(60°) = √3/2 comes from the unit circle and exact geometry.
+The √3 is irreducible — it cannot be simplified to a rational number.
+Math.sqrt(3) — Computed Once, Reused
+java(Math.sqrt(3) / 4.0) * side * side
+Math.sqrt(3) = 1.7320508075688772...
+In performance-critical code, you'd precompute:
+javaprivate static final double SQRT3_OVER_4 = Math.sqrt(3) / 4.0;
+// = 0.4330127018922193
+
+public static double areaOfEquilateralTriangle(double side) {
+return SQRT3_OVER_4 * side * side;
+}
+static final = computed once at class loading time, reused on every call.
+This is called a "compile-time constant pattern."
