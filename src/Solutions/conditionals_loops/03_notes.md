@@ -277,3 +277,44 @@ B────|────C
 ↑ foot of perpendicular
 The height is always measured at 90° to the base. The slant sides
 don't matter for area.
+
+
+
+═══════════════════════════════════════════════════════════
+BASIC PROGRAM A03: AREA OF RECTANGLE
+═══════════════════════════════════════════════════════════
+javapublic static double areaOfRectangle(double length, double width) {
+return length * width;
+}
+What Does "Area" Actually Mean?
+Area answers: "how many unit squares (1×1) fit inside this shape?"
+A rectangle 4 wide, 3 tall:
+
+┌──┬──┬──┬──┐
+│  │  │  │  │  ← row 1: 4 squares
+├──┼──┼──┼──┤
+│  │  │  │  │  ← row 2: 4 squares
+├──┼──┼──┼──┤
+│  │  │  │  │  ← row 3: 4 squares
+└──┴──┴──┴──┘
+
+Total squares = 4 + 4 + 4 = 3 × 4 = 12
+Multiplication is DEFINED as repeated addition:
+3 × 4 = 4 + 4 + 4 = 12
+So Area = l × w is literally "count the unit squares via repeated addition."
+Why Is Multiplication the Right Operation?
+If you have l columns and w rows, each intersection is a unit square.
+Counting them all: l × w by the definition of multiplication.
+This generalizes to non-integer dimensions through limits/calculus.
+What If Length and Width Are Not Integers?
+For l=2.5, w=1.5:
+We can fit:
+2 full columns + 0.5 partial column
+1 full row    + 0.5 partial row
+
+Full area     = 2 × 1 = 2
+Right strip   = 0.5 × 1 = 0.5
+Top strip     = 2 × 0.5 = 1.0
+Corner square = 0.5 × 0.5 = 0.25
+Total         = 2 + 0.5 + 1.0 + 0.25 = 3.75 = 2.5 × 1.5  ✓
+The formula works for all positive real numbers.
