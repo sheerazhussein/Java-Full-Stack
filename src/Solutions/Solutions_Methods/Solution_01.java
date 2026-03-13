@@ -1,6 +1,6 @@
 package Solutions.Solutions_Methods;
 
-public class Solutions {
+public class Solution_01 {
 
     // 01, Returns the maximum of three numbers
     public static int findMax(int a, int b, int c) {
